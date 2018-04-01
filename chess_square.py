@@ -70,6 +70,10 @@ class Square:
         return color
 
     def brother_square(self):
+        """
+        Reflects the square across the a1-h8 diagonal. The brother square is in the 
+            same relative location if you rotated the board 180 degrees. 
+        """
         (row, col) = self.coord
         new_coord = (7 - row, 7 - col)
         return Square.from_coord(new_coord)
