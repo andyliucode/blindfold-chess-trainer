@@ -1,7 +1,24 @@
 import click
 import time
+from functools import wraps
 from chess_square import (Square,
                           is_valid_square_name)
+
+
+def reporter(func):
+    @wraps(func)
+    def wrapper(num):
+        click.echo("Running drill with " + str(num) + " trials...")
+        start_time = time.time()
+        
+        score = func(num)
+
+        end_time = time.time()
+        exit_msg = "\nNice job mate, you scored " + str(score) + '/' + str(num)
+        time_taken = str(end_time - start_time) + "s"
+        click.echo(exit_msg)
+        click.echo(time_taken)
+    return wrapper
 
 
 @click.group()
@@ -11,12 +28,11 @@ def cli():
 
 @click.command()
 @click.argument('num', default=1)
+@reporter
 def colors(num):
     white_names = {"White", "w", "W"}
     black_names = {"Black", "b", "B"}
-    click.echo("Running drill with " + str(num) + " trials...")
 
-    start_time = time.time()
     score = 0
     for x in range(num):
         square = Square.random()
@@ -33,20 +49,13 @@ def colors(num):
         else:
             response = "Incorrect, " + square.name + " is " + square.color()
             click.echo(response)
-
-    end_time = time.time()
-    exit_msg = "\nNice job mate, you scored " + str(score) + '/' + str(num)
-    time_taken = str(end_time - start_time) + "s"
-    click.echo(exit_msg)
-    click.echo(time_taken)
+    return score
 
 
 @click.command()
 @click.argument('num', default=1)
+@reporter
 def brothers(num):
-    click.echo("Running drill with " + str(num) + " trials...")
-
-    start_time = time.time()
     score = 0
     for x in range(num):
         square = Square.random()
@@ -63,12 +72,7 @@ def brothers(num):
         else:
             response = "Incorrect, " + square.name + "'s brother is " + brother_square
             click.echo(response)
-
-    end_time = time.time()
-    exit_msg = "\nNice job mate, you scored " + str(score) + '/' + str(num)
-    time_taken = str(end_time - start_time) + "s"
-    click.echo(exit_msg)
-    click.echo(time_taken)
+    return score
 
 
 cli.add_command(colors)
