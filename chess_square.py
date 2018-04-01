@@ -44,10 +44,10 @@ def is_valid_square_coord(coord):
 def is_valid_square_name(name):
     if len(name) != 2:
         return False
-    if name[0] not in ['abcdefgh']:
+    if name[0] not in {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}:
         return False
-        
-    coord = coord_to_name(name)
+
+    coord = name_to_coord(name)
     return is_valid_square_coord(coord)
 
 

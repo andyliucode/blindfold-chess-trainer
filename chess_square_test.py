@@ -53,6 +53,7 @@ def main():
     # Test is_valid_square_name
     assert(is_valid_square_name('a1'))
     assert(is_valid_square_name('h8'))
+    assert(is_valid_square_name('e4'))
     assert(not is_valid_square_name('E4'))
     assert(not is_valid_square_name('h10'))
     assert(not is_valid_square_name('i1'))
