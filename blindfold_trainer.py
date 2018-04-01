@@ -1,10 +1,13 @@
 import click
 import time
-from chess_square import Square
+from chess_square import (Square,
+                          is_valid_square_name)
+
 
 @click.group()
 def cli():
     pass
+
 
 @click.command()
 @click.argument('num', default=1)
@@ -37,6 +40,7 @@ def colors(num):
     click.echo(exit_msg)
     click.echo(time_taken)
 
+
 @click.command()
 @click.argument('num', default=1)
 def brothers(num):
@@ -47,16 +51,17 @@ def brothers(num):
     for x in range(num):
         square = Square.random()
         click.echo('\n')
+        input_name = input(square.name + '\n')
 
-        # while(input_square not in white_names.union(black_names)):
-            # input_square = input("That's not a square, mate! Try again\n")
+        while(not is_valid_square_name(input_name)):
+            input_name = input("That's not a square, mate! Try again\n")
 
         brother_square = square.brother_square().name
         if (input_name == brother_square):
             click.echo("Correct!")
             score = score + 1
         else:
-            response = "Incorrect, " + square.name + "'s brother' is " + brother_square
+            response = "Incorrect, " + square.name + "'s brother is " + brother_square
             click.echo(response)
 
     end_time = time.time()
@@ -65,8 +70,10 @@ def brothers(num):
     click.echo(exit_msg)
     click.echo(time_taken)
 
+
 cli.add_command(colors)
 cli.add_command(brothers)
+
 
 if __name__ == "__main__":
     cli()
