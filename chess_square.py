@@ -34,6 +34,23 @@ def coord_to_name(coord):
     return ffile + rank
 
 
+def is_valid_square_coord(coord):
+    (row, col) = coord
+    valid_row = (0 <= row) and (row <= 7)
+    valid_col = (0 <= col) and (col <= 7)
+    return valid_row and valid_col
+
+
+def is_valid_square_name(name):
+    if len(name) != 2:
+        return False
+    if name[0] not in ['abcdefgh']:
+        return False
+        
+    coord = coord_to_name(name)
+    return is_valid_square_coord(coord)
+
+
 class Square:
     """
     Represents a square on a chess board, an 8x8 grid of squares where odd parity squares are white and even parity squares are black. 
