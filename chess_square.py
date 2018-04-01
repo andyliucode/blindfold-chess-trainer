@@ -34,6 +34,23 @@ def coord_to_name(coord):
     return ffile + rank
 
 
+def is_valid_square_coord(coord):
+    (row, col) = coord
+    valid_row = (0 <= row) and (row <= 7)
+    valid_col = (0 <= col) and (col <= 7)
+    return valid_row and valid_col
+
+
+def is_valid_square_name(name):
+    if len(name) != 2:
+        return False
+    if name[0] not in {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}:
+        return False
+
+    coord = name_to_coord(name)
+    return is_valid_square_coord(coord)
+
+
 class Square:
     """
     Represents a square on a chess board, an 8x8 grid of squares where odd parity squares are white and even parity squares are black. 
@@ -59,7 +76,7 @@ class Square:
 
     @classmethod
     def random(cls):
-        rand_coord = (randint(0, 7), randint(0,7))
+        rand_coord = (randint(0,7), randint(0,7))
         rand_square = coord_to_name(rand_coord)
         return cls(coord=rand_coord, name=rand_square)
 
@@ -68,3 +85,12 @@ class Square:
         parity_of_coord = (row + col) % 2
         color = ("Black" if parity_of_coord else "White")
         return color
+
+    def brother_square(self):
+        """
+        Reflects the square across the a1-h8 diagonal. The brother square is in the 
+            same relative location if you rotated the board 180 degrees. 
+        """
+        (row, col) = self.coord
+        new_coord = (7 - row, 7 - col)
+        return Square.from_coord(new_coord)
