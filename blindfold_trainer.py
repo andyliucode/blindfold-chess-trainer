@@ -20,16 +20,16 @@ def colors(num):
         click.echo('\n')
         input_color = input(square.name + '\n')
 
-    while(input_color not in white_names.union(black_names)):
-        input_color = input("That's not a color, mate! Try again\n")
+        while(input_color not in white_names.union(black_names)):
+            input_color = input("That's not a color, mate! Try again\n")
 
-    correct_names = white_names if square.color() == "White" else black_names
-    if (input_color in correct_names):
-        click.echo("Correct!")
-        score = score + 1
-    else:
-        response = "Incorrect, " + square.name + " is " + square.color()
-        click.echo(response)
+        correct_names = white_names if square.color() == "White" else black_names
+        if (input_color in correct_names):
+            click.echo("Correct!")
+            score = score + 1
+        else:
+            response = "Incorrect, " + square.name + " is " + square.color()
+            click.echo(response)
 
     end_time = time.time()
     exit_msg = "\nNice job mate, you scored " + str(score) + '/' + str(num)
