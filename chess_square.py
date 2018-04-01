@@ -59,7 +59,7 @@ class Square:
 
     @classmethod
     def random(cls):
-        rand_coord = (randint(0, 7), randint(0,7))
+        rand_coord = (randint(0,7), randint(0,7))
         rand_square = coord_to_name(rand_coord)
         return cls(coord=rand_coord, name=rand_square)
 
@@ -68,3 +68,8 @@ class Square:
         parity_of_coord = (row + col) % 2
         color = ("Black" if parity_of_coord else "White")
         return color
+
+    def brother_square(self):
+        (row, col) = self.coord
+        new_coord = (7 - row, 7 - col)
+        return Square.from_coord(new_coord)

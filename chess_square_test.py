@@ -34,6 +34,12 @@ def main():
     assert(Square.from_name('h1').color() == 'White')
     assert(Square.from_name('h8').color() == 'Black')
 
+    # Test brother_square
+    assert(Square.from_name('a8').brother_square().name == 'h1')
+    assert(Square.from_name('c4').brother_square().name == 'f5')
+    assert(Square.from_name('e1').brother_square().name == 'd8')
+    assert(Square.from_name('d4').brother_square().name == 'e5')
+
 
 if __name__ == '__main__':
     main() 
