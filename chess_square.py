@@ -80,6 +80,14 @@ class Square:
         rand_square = coord_to_name(rand_coord)
         return cls(coord=rand_coord, name=rand_square)
 
+    @classmethod
+    def random_inside(cls, coordA, coordB):
+        row1, row2 = min(coordA[0], coordB[0]), max(coordA[0], coordB[0])
+        col1, col2 = min(coordA[1], coordB[1]), max(coordA[1], coordB[1])
+        rand_coord = (randint(row1, row2), randint(col1, col2))
+        rand_square = coord_to_name(rand_coord)
+        return cls(coord=rand_coord, name=rand_square)
+        
     def color(self):
         (row, col) = self.coord
         parity_of_coord = (row + col) % 2

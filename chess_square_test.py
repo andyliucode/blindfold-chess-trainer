@@ -58,5 +58,6 @@ def main():
     assert(not is_valid_square_name('h10'))
     assert(not is_valid_square_name('i1'))
 
+
 if __name__ == '__main__':
     main() 
