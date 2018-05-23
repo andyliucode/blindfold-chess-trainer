@@ -33,8 +33,7 @@ def find_shortest_path(source, sink, moves):
     int tuple sink: the ending coordinate
     (int tuple -> int tuple iterator) moves: a function that takes as input 
         a coordinate and generates all reachable coordinates
-    returns (int, list of int tuples): returns length of shortest path as well
-        as the path itself in the form of a coordinate list
+    returns list of int tuples: returns the shortest path in the form of a coordinate list. note that this path contains the source. 
     """
     frontier = deque()
     frontier.append(source)
@@ -61,5 +60,13 @@ def find_shortest_path(source, sink, moves):
         shortest_path.appendleft(node)
         node = prev_node_dict[node][0]
 
-    return prev_node_dict[sink][1], shortest_path
+    return list(shortest_path)
 
+def is_legal_path(source, sink, moves, path):
+    if ((len(path) < 1) or source != path[0] or sink != path[-1]):
+        return False
+    else:
+        for (origin, head) in zip(path[:-1], path[1:]):
+            if head not in list(moves(origin)):
+                return False
+        return True

@@ -94,15 +94,16 @@ def knight_path(num):
         target_square = Square.random_inside((0,0), (0,7))
         click.echo('\n')
         shortest_path = find_shortest_path(starting_square.coord, target_square.coord, knight_moves)
+        num_moves = len(shortest_path) - 1
         
         input_len = input(starting_square.name + " to " + target_square.name + '\n')
 
-        if (int(input_len) == shortest_path[0]):
+        if (int(input_len) == num_moves):
             click.echo("Correct!")
             score = score + 1
         else:
-            response = "Incorrect, " + target_square.name + " can be reached in " + str(shortest_path[0]) + " moves, e.g." + '\n'
-            response += ' '.join(list(map(coord_to_name, shortest_path[1])))
+            response = "Incorrect, " + target_square.name + " can be reached in " + str(num_moves) + " moves, e.g." + '\n'
+            response += ' '.join(list(map(coord_to_name, shortest_path)))
             click.echo(response)
 
     return score
