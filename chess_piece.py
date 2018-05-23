@@ -62,6 +62,7 @@ def find_shortest_path(source, sink, moves):
 
     return list(shortest_path)
 
+# REQUIRES: source != sink
 def is_legal_path(source, sink, moves, path):
     if ((len(path) < 1) or source != path[0] or sink != path[-1]):
         return False
