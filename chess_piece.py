@@ -26,7 +26,7 @@ def knight_moves(origin):
     return heads
 
 
-def shortest_path(source, sink, moves):
+def find_shortest_path(source, sink, moves):
     """
     Takes a source coordinate, sink coordinate, and a moves generator function
     int tuple source: the starting coordinate

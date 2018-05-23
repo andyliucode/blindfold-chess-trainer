@@ -1,7 +1,7 @@
 import unittest
 from chess_square import name_to_coord
 from chess_piece import (knight_moves,
-                         shortest_path)
+                         find_shortest_path)
 from collections import deque
 
 
@@ -20,10 +20,10 @@ class TestChessPiece(unittest.TestCase):
         moves = list(knight_moves(self.e4))
         self.assertEqual(moves, [(6, 5), (6, 3), (5, 6), (5, 2), (2, 5), (2, 3), (3, 6), (3, 2)])
 
-    def test_shortest_path(self):
-        self.assertEqual(shortest_path((0,0), (2,1), knight_moves), (1, deque([(0,0), (2,1)])))
-        self.assertEqual(shortest_path((0,0), (4,2), knight_moves), (2, deque([(0, 0), (2, 1), (4, 2)])))
-        self.assertEqual(shortest_path((0,0), (3,4), knight_moves), (3, deque([(0, 0), (2, 1), (4, 2), (3, 4)])))
+    def test_find_shortest_path(self):
+        self.assertEqual(find_shortest_path((0,0), (2,1), knight_moves), (1, deque([(0,0), (2,1)])))
+        self.assertEqual(find_shortest_path((0,0), (4,2), knight_moves), (2, deque([(0, 0), (2, 1), (4, 2)])))
+        self.assertEqual(find_shortest_path((0,0), (3,4), knight_moves), (3, deque([(0, 0), (2, 1), (4, 2), (3, 4)])))
 
 if __name__ == '__main__':
     unittest.main()
